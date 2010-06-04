@@ -1,0 +1,15 @@
+JAVA_CLASSPATH="dbus.jar:mina-core.jar:slf4j-api.jar:unix.jar:zemberek-cekirdek.jar:zemberek-tr.jar"
+inherit ant
+
+DESCRIPTION="Natural Language Processing for Turkic languages"
+HOMEPAGE="http://code.google.com/p/zemberek/"
+SRC_URI="http://zemberek.googlecode.com/files/${P}.tar.gz"
+SRC_DIR="."
+
+DISTCLEANFILES="lib/*.jar lib/native-*/*.so"
+
+src_install() {
+	cd ${B}
+	dojar dist/*.jar
+	java_wrapper zemberek-server zemberek-server.jar net.zemberekserver.server.ZemberekServer
+}
